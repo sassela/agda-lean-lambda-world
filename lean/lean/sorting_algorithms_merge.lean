@@ -136,6 +136,8 @@ def mergeTime (xs ys : List α) : Nat :=
     then 1 + mergeTime xs (y :: ys)
     else 1 + mergeTime (x :: xs) ys
 
+#eval mergeTime (mergeSort [1, 2, 3, 4]) (mergeSort [5, 6, 7, 8]) -- 4
+
 def mergeSortTime (xs : List α) : Nat :=
   if h : xs.length < 2 then 0
   else
