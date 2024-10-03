@@ -64,7 +64,22 @@ syntax step-≡ x y≡z x≡y = x ≡⟨ x≡y ⟩ y≡z
 -- -----
 
 +-comm : (m n : ℕ) → m + n ≡ n + m
-+-comm = ?
+
++-comm zero n =
+  begin
+  n
+  ≡⟨ sym (+-0 n) ⟩
+  n + zero
+  ∎
+
++-comm (suc m) n =
+  begin
+  suc (m + n)
+  ≡⟨cong suc (+-comm m n)⟩
+  suc (n + m)
+  ≡⟨ sym (+-suc n m) ⟩
+  n + suc m
+  ∎
 
 -- -----
 
