@@ -5,7 +5,7 @@ import Mathlib.Tactic
 
 The `by` keyword enters into tactic mode:
 
-- sorry
+- sorry: equivant to `?` in Agda, it creates a hole
 - exact: To prove A it is enough to provide an a : A (a proof of A)
 - assumption: To prove A it is enough to have an a : A (a proof of A) in your assumptions
 - intro: To prove A → B it is enough that given an a : A (a proof of A), build a b: B (a proof of B)
@@ -21,29 +21,43 @@ variable (A B C : Prop)
 
 -- sorry
 
-example : A → ¬ A := sorry
+example : A → ¬ A := by sorry
 
 theorem fermatLastTheorem: ¬ (∃ x y z n : Nat, (n > 2) → x ^ n + y ^ n = z ^ n) := sorry
 
 -- exact
-example (a : A) : A := sorry
+example (a : A) : A := by exact a
 
-example (a : A) (f : A → B) : B := sorry
+example (a : A) (f : A → B) : B := by exact f a
 
 -- assumption
-example (a : A) : A := sorry
+example (a : A) : A := by assumption
 
 -- intro
-example: A → A := sorry
+example: A → A := by
+  intro a
+  assumption
 
-example: A → (A → B) → B := sorry
+example: A → (A → B) → B := by
+  intro a aib -- a implies b (or A → B)
+  exact aib a
 
 -- apply
-example (a : A) (f : A → B) : B := sorry
+example (a : A) (f : A → B) : B := by
+  apply f
+  assumption
 
 -- `→` is transitive.
 -- tactic mode
-example : (A → B) → (B → C) → (A → C) := sorry
+example : (A → B) → (B → C) → (A → C) := by
+  intro aib bic a -- chain of implications. introduces a new variable `a` of type A
+  apply bic
+  apply aib
+  assumption
+  -- intro ab bc a
+  -- apply bc
+  -- apply ab
+  -- assumption
 
 example : (A → B → C) → (A → B) → (A → C) := sorry
 
@@ -51,7 +65,10 @@ example : A ∧ B → A := sorry
 
 example : A ∧ B → B := sorry
 
-example: A → A ∨ B := sorry
+example: A → A ∨ B := by
+  intro a
+  left
+  assumption
 
 example: B → A ∨ B := sorry
 
@@ -157,7 +174,9 @@ lemma eq_congr (p : Nat → Prop): x = y → p x = p y := sorry
 
 
 -- simp
-example : (x = y + 1) → (y = z + 2) → (x = z + 3) := sorry
+example : (x = y + 1) → (y = z + 2) → (x = z + 3) := by
+  intro h1 h2
+  simp [h1, h2]
 
 -- induction:
 lemma zero_comm: 0 + x = x + 0 := sorry
