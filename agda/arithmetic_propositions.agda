@@ -23,12 +23,12 @@ private
 -- -----
 
 +-suc : (m n : ℕ) → m + suc n ≡ suc (m + n)
-+-suc = ?
++-suc = {!   !}
 
 -- -----
 
 +-assoc : (m n p : ℕ) → (m + n) + p ≡ m + (n + p)
-+-assoc = ?
++-assoc = {!   !}
 
 -- -----
 
@@ -69,7 +69,7 @@ syntax step-≡ x y≡z x≡y = x ≡⟨ x≡y ⟩ y≡z
 -- -----
 
 +-right-comm : (m n p : ℕ) → m + n + p ≡ m + p + n
-+-right-comm = ?
++-right-comm = {!   !}
 
 -- -----
 
@@ -98,10 +98,10 @@ data Either (A B : Set) : Set where
   i2 : B → Either A B
 
 ei-++ : {a : A} {xs ys : List A} → Either (a ∈ xs) (a ∈ ys) → a ∈ (xs ++ ys)
-ei-++ = ?
+ei-++ = {!   !}
 
 ++-ei : {a : A} {xs ys : List A} → a ∈ (xs ++ ys) → Either (a ∈ xs) (a ∈ ys)
-++-ei = ?
+++-ei = {!   !}
 
 -- -----
 
@@ -112,19 +112,19 @@ zero    * n  =  zero
 -- -----
 
 *-1 : (m : ℕ) → (suc zero) * m ≡ m
-*-1 = ?
+*-1 = {!   !}
 
 -- -----
 
 *-0 : (m : ℕ) → m * zero ≡ zero
-*-0 = ?
+*-0 = {!   !}
 
 -- -----
 
 *-suc : (m n : ℕ) → m * (suc n) ≡ m * n + m
-*-suc = ?
+*-suc = {!   !}
 
 -- -----
 
 *-comm : (m n : ℕ) → m * n ≡ n * m
-*-comm = ?
+*-comm = {!   !}
